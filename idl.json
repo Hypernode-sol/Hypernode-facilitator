@@ -1,0 +1,381 @@
+{
+  "version": "0.1.0",
+  "name": "hypernode_facilitator",
+  "instructions": [
+    {
+      "name": "registerNode",
+      "accounts": [
+        {
+          "name": "node",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stakingAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "hyperMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "nodeId",
+          "type": "string"
+        },
+        {
+          "name": "stakeAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "authorizePayment",
+      "accounts": [
+        {
+          "name": "paymentIntent",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "client",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "escrow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "clientTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "escrowTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "intentData",
+          "type": {
+            "defined": "PaymentIntentData"
+          }
+        }
+      ]
+    },
+    {
+      "name": "submitUsageProof",
+      "accounts": [
+        {
+          "name": "usageProof",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "paymentIntent",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "node",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "oracle",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "escrow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nodeTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "proofData",
+          "type": {
+            "defined": "UsageProofData"
+          }
+        }
+      ]
+    },
+    {
+      "name": "claimRewards",
+      "accounts": [
+        {
+          "name": "node",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "stakingAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authorityTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "NodeAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "nodeId",
+            "type": "string"
+          },
+          {
+            "name": "stakeAmount",
+            "type": "u64"
+          },
+          {
+            "name": "totalEarned",
+            "type": "u64"
+          },
+          {
+            "name": "jobsCompleted",
+            "type": "u64"
+          },
+          {
+            "name": "isActive",
+            "type": "bool"
+          },
+          {
+            "name": "registeredAt",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PaymentIntent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "client",
+            "type": "publicKey"
+          },
+          {
+            "name": "intentId",
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": "PaymentStatus"
+            }
+          },
+          {
+            "name": "createdAt",
+            "type": "i64"
+          },
+          {
+            "name": "expiresAt",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UsageProof",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intentId",
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "type": "string"
+          },
+          {
+            "name": "executionHash",
+            "type": "string"
+          },
+          {
+            "name": "completedAt",
+            "type": "i64"
+          },
+          {
+            "name": "verified",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "PaymentIntentData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intentId",
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "expiresAt",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UsageProofData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intentId",
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "type": "string"
+          },
+          {
+            "name": "executionHash",
+            "type": "string"
+          },
+          {
+            "name": "logsHash",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PaymentStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Authorized"
+          },
+          {
+            "name": "Completed"
+          },
+          {
+            "name": "Refunded"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidPaymentIntent",
+      "msg": "Invalid payment intent"
+    },
+    {
+      "code": 6001,
+      "name": "PaymentExpired",
+      "msg": "Payment intent has expired"
+    },
+    {
+      "code": 6002,
+      "name": "UnauthorizedOracle",
+      "msg": "Unauthorized oracle"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidProof",
+      "msg": "Invalid usage proof"
+    }
+  ],
+  "metadata": {
+    "address": "HYPRfaci11tator1111111111111111111111111111"
+  }
+}
