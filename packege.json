@@ -1,0 +1,45 @@
+{
+  "name": "@hypernode/facilitator",
+  "version": "0.2.0",
+  "description": "x402 Payment Protocol Implementation for Hypernode - Offchain Services",
+  "type": "module",
+  "main": "x402.js",
+  "scripts": {
+    "start": "node offchain/oracle-service/index.js",
+    "test": "echo \"Tests not implemented yet\" && exit 0",
+    "dev": "node --watch offchain/oracle-service/index.js"
+  },
+  "keywords": [
+    "x402",
+    "payment-protocol",
+    "solana",
+    "hypernode",
+    "facilitator",
+    "oracle",
+    "redis"
+  ],
+  "author": "Hypernode Solana Team",
+  "license": "MIT",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.0",
+    "@solana/web3.js": "^1.95.0",
+    "bs58": "^5.0.0",
+    "express": "^4.18.2",
+    "ioredis": "^5.3.2",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hypernode-sol/Hypernode-facilitator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hypernode-sol/Hypernode-facilitator/issues"
+  },
+  "homepage": "https://github.com/Hypernode-sol/Hypernode-facilitator#readme"
+}
